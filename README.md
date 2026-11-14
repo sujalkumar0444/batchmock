@@ -57,6 +57,14 @@ npm run dev
 
 App: http://localhost:5173
 
+The frontend defaults to the backend API at `http://localhost:5000/api`. To use a different API URL, create `frontend/.env.local` with:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+Restart the Vite dev server after changing this value.
+
 ## API
 
 ### GET /api/batches
