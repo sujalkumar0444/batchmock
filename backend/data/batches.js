@@ -1,8 +1,25 @@
 /**
- * Mock batch records used by the API.
- * No database — this array is the single source of truth.
+ * Mock batch records — single source of truth for the API (no database).
+ * Built from small lookup lists so adding courses/centres/statuses stays easy.
  */
-const batches = [
+
+const COURSES = [
+  'Full Stack',
+  'Data Science',
+  'UI/UX Design',
+  'Cloud Computing',
+  'Cyber Security',
+  'DevOps',
+  'Mobile Development',
+  'AI & ML',
+];
+
+const CENTRES = ['London-HQ', 'Manchester', 'Birmingham', 'Edinburgh', 'Leeds'];
+
+const STATUSES = ['Running', 'Upcoming', 'Completed'];
+
+/** Seed rows keep the first records realistic and easy to demo in the UI. */
+const SEED_BATCHES = [
   {
     id: 1,
     batchCode: 'B-2401',
@@ -53,76 +70,47 @@ const batches = [
     capacity: 30,
     status: 'Running',
   },
-  {
-    id: 6,
-    batchCode: 'B-2406',
-    course: 'Full Stack',
-    centre: 'Manchester',
-    startDate: '2024-06-01',
-    enrolled: 8,
-    capacity: 35,
-    status: 'Upcoming',
-  },
-  {
-    id: 7,
-    batchCode: 'B-2407',
-    course: 'DevOps',
-    centre: 'Birmingham',
-    startDate: '2023-09-15',
-    enrolled: 24,
-    capacity: 25,
-    status: 'Completed',
-  },
-  {
-    id: 8,
-    batchCode: 'B-2408',
-    course: 'Mobile Development',
-    centre: 'London-HQ',
-    startDate: '2024-03-20',
-    enrolled: 15,
-    capacity: 20,
-    status: 'Running',
-  },
-  {
-    id: 9,
-    batchCode: 'B-2409',
-    course: 'AI & ML',
-    centre: 'Edinburgh',
-    startDate: '2024-07-15',
-    enrolled: 5,
-    capacity: 30,
-    status: 'Upcoming',
-  },
-  {
-    id: 10,
-    batchCode: 'B-2410',
-    course: 'Data Science',
-    centre: 'London-HQ',
-    startDate: '2023-10-01',
-    enrolled: 30,
-    capacity: 30,
-    status: 'Completed',
-  },
-  {
-    id: 11,
-    batchCode: 'B-2411',
-    course: 'Full Stack',
-    centre: 'Birmingham',
-    startDate: '2024-01-08',
-    enrolled: 27,
-    capacity: 35,
-    status: 'Running',
-  },
-  {
-    id: 12,
-    batchCode: 'B-2412',
-    course: 'UI/UX Design',
-    centre: 'Manchester',
-    startDate: '2024-08-01',
-    enrolled: 3,
-    capacity: 25,
-    status: 'Upcoming',
-  },
 ];
+
+/**
+ * Builds extra mock rows so pagination has several pages to navigate.
+ * Total target: 30 records (6 pages at limit=5).
+ */
+function buildExtraBatches(startId, count) {
+  const extras = [];
+
+  for (let index = 0; index < count; index += 1) {
+    const id = startId + index;
+    const course = COURSES[index % COURSES.length];
+    const centre = CENTRES[index % CENTRES.length];
+    const status = STATUSES[index % STATUSES.length];
+    const capacity = 20 + ((index * 3) % 16);
+    const enrolled =
+      status === 'Upcoming'
+        ? Math.min(8, capacity)
+        : status === 'Completed'
+          ? capacity
+          : Math.min(capacity, 10 + ((index * 5) % capacity));
+
+    const month = ((index % 12) + 1).toString().padStart(2, '0');
+    const day = ((index % 27) + 1).toString().padStart(2, '0');
+    const year = status === 'Completed' ? 2023 : 2024;
+
+    extras.push({
+      id,
+      batchCode: `B-${2400 + id}`,
+      course,
+      centre,
+      startDate: `${year}-${month}-${day}`,
+      enrolled,
+      capacity,
+      status,
+    });
+  }
+
+  return extras;
+}
+
+const batches = [...SEED_BATCHES, ...buildExtraBatches(6, 25)];
 
 module.exports = batches;

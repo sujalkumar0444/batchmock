@@ -1,8 +1,4 @@
-const STATUS_STYLES = {
-  Running: 'bg-status-running-bg text-status-running',
-  Upcoming: 'bg-status-upcoming-bg text-status-upcoming',
-  Completed: 'bg-status-completed-bg text-status-completed',
-};
+import { STATUS_STYLES } from '../constants';
 
 function StatusBadge({ status }) {
   const style = STATUS_STYLES[status] || 'bg-gray-100 text-gray-600';

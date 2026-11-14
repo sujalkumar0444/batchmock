@@ -24,7 +24,7 @@ function useBatches() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Debounce search input; reset to first page when the query settles
+  // Debounce search; jump back to page 1 when the query settles
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
@@ -34,7 +34,7 @@ function useBatches() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  // Reset to first page when filters change
+  // Jump back to page 1 when filters change
   useEffect(() => {
     setPage(1);
   }, [status, centre]);
@@ -49,7 +49,7 @@ function useBatches() {
           setCentres(response.data);
         }
       } catch {
-        // Dropdown can remain empty; batch list still works
+        // Centres dropdown can stay empty; listing still works
       }
     };
 
@@ -72,12 +72,18 @@ function useBatches() {
         centre,
       });
 
-      if (response.success) {
-        setBatches(response.data);
-        setPagination(response.pagination);
-      } else {
+      if (!response.success) {
         setBatches([]);
         setError('Failed to load batches.');
+        return;
+      }
+
+      setBatches(response.data);
+      setPagination(response.pagination);
+
+      // Keep local page in sync if the API clamped it (e.g. after filtering)
+      if (response.pagination.page !== page) {
+        setPage(response.pagination.page);
       }
     } catch {
       setBatches([]);

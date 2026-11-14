@@ -12,6 +12,13 @@ export const STATUS_OPTIONS = [
   { value: 'Completed', label: 'Completed' },
 ];
 
+/** Tailwind classes for status pills — extend here when adding a new status. */
+export const STATUS_STYLES = {
+  Running: 'bg-status-running-bg text-status-running',
+  Upcoming: 'bg-status-upcoming-bg text-status-upcoming',
+  Completed: 'bg-status-completed-bg text-status-completed',
+};
+
 /** Sidebar navigation items (UI only). */
 export const NAV_ITEMS = [
   { id: 'franchise', label: 'Franchise Management' },

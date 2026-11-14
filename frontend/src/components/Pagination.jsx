@@ -1,3 +1,4 @@
+import { getVisiblePages } from '../utils/getVisiblePages';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 function Pagination({ page, totalPages, totalRecords, limit, onPageChange }) {
@@ -5,14 +6,14 @@ function Pagination({ page, totalPages, totalRecords, limit, onPageChange }) {
     return null;
   }
 
-  const start = (page - 1) * limit + 1;
-  const end = Math.min(page * limit, totalRecords);
-  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+  // Match reference UI: "Showing 5 of 124 batches"
+  const visibleCount = Math.min(limit, totalRecords - (page - 1) * limit);
+  const pages = getVisiblePages(page, totalPages);
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-row bg-white px-5 py-3.5">
       <p className="text-sm text-text-muted">
-        Showing {start} to {end} of {totalRecords} batches
+        Showing {visibleCount} of {totalRecords} batches
       </p>
 
       <div className="flex items-center gap-1.5">
