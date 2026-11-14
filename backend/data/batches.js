@@ -1,8 +1,3 @@
-/**
- * Mock batch records — single source of truth for the API (no database).
- * Built from small lookup lists so adding courses/centres/statuses stays easy.
- */
-
 const COURSES = [
   'Full Stack',
   'Data Science',
@@ -18,7 +13,6 @@ const CENTRES = ['London-HQ', 'Manchester', 'Birmingham', 'Edinburgh', 'Leeds'];
 
 const STATUSES = ['Running', 'Upcoming', 'Completed'];
 
-/** Seed rows keep the first records realistic and easy to demo in the UI. */
 const SEED_BATCHES = [
   {
     id: 1,
@@ -72,10 +66,6 @@ const SEED_BATCHES = [
   },
 ];
 
-/**
- * Builds extra mock rows so pagination has several pages to navigate.
- * Total target: 30 records (6 pages at limit=5).
- */
 function buildExtraBatches(startId, count) {
   const extras = [];
 

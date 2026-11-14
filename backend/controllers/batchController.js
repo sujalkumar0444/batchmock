@@ -1,10 +1,6 @@
 const batches = require('../data/batches');
 const { filterBatches, paginate } = require('../utils/filterBatches');
 
-/**
- * GET /api/batches
- * Supports: page, limit, search, status, centre
- */
 const getBatches = (req, res) => {
   try {
     const { page, limit, search, status, centre } = req.query;
@@ -25,10 +21,6 @@ const getBatches = (req, res) => {
   }
 };
 
-/**
- * GET /api/centres
- * Distinct centre names for the filter dropdown.
- */
 const getCentres = (_req, res) => {
   try {
     const centres = [...new Set(batches.map((batch) => batch.centre))].sort();

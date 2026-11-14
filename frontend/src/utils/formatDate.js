@@ -1,6 +1,3 @@
-/**
- * Formats an ISO date string as "Mar 15, 2024".
- */
 export function formatDate(dateString) {
   const date = new Date(dateString);
 

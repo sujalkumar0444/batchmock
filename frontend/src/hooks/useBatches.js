@@ -2,9 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { PAGE_LIMIT, SEARCH_DEBOUNCE_MS } from '../constants';
 import { fetchBatches, fetchCentres } from '../services/batchService';
 
-/**
- * Encapsulates batch list state: search, filters, pagination, and API calls.
- */
 function useBatches() {
   const [batches, setBatches] = useState([]);
   const [centres, setCentres] = useState([]);
@@ -24,7 +21,6 @@ function useBatches() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Debounce search; jump back to page 1 when the query settles
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
@@ -34,7 +30,6 @@ function useBatches() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  // Jump back to page 1 when filters change
   useEffect(() => {
     setPage(1);
   }, [status, centre]);
@@ -49,7 +44,7 @@ function useBatches() {
           setCentres(response.data);
         }
       } catch {
-        // Centres dropdown can stay empty; listing still works
+        // ignore
       }
     };
 
@@ -81,7 +76,6 @@ function useBatches() {
       setBatches(response.data);
       setPagination(response.pagination);
 
-      // Keep local page in sync if the API clamped it (e.g. after filtering)
       if (response.pagination.page !== page) {
         setPage(response.pagination.page);
       }

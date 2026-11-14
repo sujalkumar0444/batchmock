@@ -7,10 +7,6 @@ const api = axios.create({
   timeout: 10000,
 });
 
-/**
- * Fetch paginated batches with optional search and filters.
- * @param {{ page?: number, limit?: number, search?: string, status?: string, centre?: string }} params
- */
 export const fetchBatches = async (params = {}) => {
   const response = await api.get('/batches', {
     params: {
@@ -25,7 +21,6 @@ export const fetchBatches = async (params = {}) => {
   return response.data;
 };
 
-/** Fetch distinct centre names for the filter dropdown. */
 export const fetchCentres = async () => {
   const response = await api.get('/centres');
   return response.data;

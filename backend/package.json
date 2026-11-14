@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Batch Operations API - Express backend",
+  "description": "Batch Operations API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

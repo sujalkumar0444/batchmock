@@ -6,7 +6,6 @@ function Pagination({ page, totalPages, totalRecords, limit, onPageChange }) {
     return null;
   }
 
-  // Match reference UI: "Showing 5 of 124 batches"
   const visibleCount = Math.min(limit, totalRecords - (page - 1) * limit);
   const items = getVisiblePages(page, totalPages);
 

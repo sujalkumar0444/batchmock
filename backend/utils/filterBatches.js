@@ -1,7 +1,3 @@
-/**
- * Apply search + status + centre filters to the batch list.
- * Empty search/status/centre values mean "no filter" (match all).
- */
 function filterBatches(batches, { search = '', status = '', centre = '' }) {
   const normalizedSearch = search.trim().toLowerCase();
   const normalizedStatus = status.trim().toLowerCase();
@@ -23,9 +19,6 @@ function filterBatches(batches, { search = '', status = '', centre = '' }) {
   });
 }
 
-/**
- * Slice a filtered list into a single page.
- */
 function paginate(items, page = 1, limit = 5) {
   const safeLimit = Math.max(1, Number(limit) || 5);
   const totalRecords = items.length;

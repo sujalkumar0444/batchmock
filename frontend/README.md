@@ -1,12 +1,10 @@
-# Frontend – Batch Operations
-
-React + Vite + Tailwind CSS UI for the Batch Operations assignment.
-
-See the root [README](../README.md) for full setup instructions.
+# Frontend
 
 ```bash
 npm install
 npm run dev
 ```
 
-Runs at http://localhost:5173
+Runs on http://localhost:5173
+
+See the root README for full setup.
