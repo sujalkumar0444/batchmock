@@ -1,0 +1,68 @@
+import { ChevronLeftIcon, ChevronRightIcon } from './icons';
+
+function Pagination({ page, totalPages, totalRecords, limit, onPageChange }) {
+  if (totalRecords === 0) {
+    return null;
+  }
+
+  const start = (page - 1) * limit + 1;
+  const end = Math.min(page * limit, totalRecords);
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-row bg-white px-5 py-3.5">
+      <p className="text-sm text-text-muted">
+        Showing {start} to {end} of {totalRecords} batches
+      </p>
+
+      <div className="flex items-center gap-1.5">
+        <NavButton
+          label="Previous page"
+          disabled={page <= 1}
+          onClick={() => onPageChange(page - 1)}
+        >
+          <ChevronLeftIcon className="h-4 w-4" />
+        </NavButton>
+
+        {pages.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            type="button"
+            onClick={() => onPageChange(pageNumber)}
+            className={`flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium transition-colors ${
+              pageNumber === page
+                ? 'bg-accent text-white'
+                : 'border border-border-soft text-text-muted hover:bg-hover'
+            }`}
+          >
+            {pageNumber}
+          </button>
+        ))}
+
+        <NavButton
+          label="Next page"
+          disabled={page >= totalPages}
+          onClick={() => onPageChange(page + 1)}
+        >
+          <ChevronRightIcon className="h-4 w-4" />
+        </NavButton>
+      </div>
+    </div>
+  );
+}
+
+function NavButton({ label, disabled, onClick, children }) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      disabled={disabled}
+      onClick={onClick}
+      className="flex h-8 w-8 items-center justify-center rounded-md border border-border-soft text-text-muted disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:bg-hover"
+    >
+      {children}
+    </button>
+  );
+}
+
+export default Pagination;

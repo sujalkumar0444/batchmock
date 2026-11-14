@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #f5f2ed;
+  --color-sidebar: #faf8f5;
+  --color-panel: #faf9f7;
+  --color-card: #ffffff;
+  --color-border: #e8e4dc;
+  --color-border-soft: #e5e0d8;
+  --color-row: #f0ebe3;
+  --color-header: #f7f4ef;
+  --color-hover: #faf8f5;
+  --color-hover-deep: #f3efe8;
+  --color-text: #2c2926;
+  --color-text-body: #3d3a36;
+  --color-text-secondary: #4a4641;
+  --color-text-muted: #6b6560;
+  --color-text-faint: #8a837a;
+  --color-placeholder: #a39e96;
+  --color-icon-muted: #9a948c;
+  --color-accent: #e8a05c;
+  --color-accent-soft: #f5e6d3;
+  --color-accent-text: #5c4a32;
+  --color-gold: #d4a574;
+  --color-gold-text: #8a6430;
+  --color-gold-bg: #faf6f0;
+  --color-gold-hover: #f5ebe0;
+  --color-logout-from: #e85d4c;
+  --color-logout-to: #d4483a;
+  --color-status-running-bg: #e8f6ec;
+  --color-status-running: #2f7a45;
+  --color-status-upcoming-bg: #fff4e5;
+  --color-status-upcoming: #b36b00;
+  --color-status-completed-bg: #eef0f3;
+  --color-status-completed: #5a6270;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
